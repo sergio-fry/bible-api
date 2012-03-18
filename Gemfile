@@ -44,8 +44,13 @@ group :development do
   gem 'guard-rspec'
   gem 'guard-spork'
   gem 'spork-rails'
+  gem 'heroku'
 end
 
 group :test do
   gem 'webmock'
+end
+
+group :production do
+  gem 'pg'
 end
