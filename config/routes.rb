@@ -1,5 +1,5 @@
 BibbleApi::Application.routes.draw do
-  get '/guess/book_name', :to => "guess#book_name"
+  get '/bible/quote', :to => "bible#quote"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
