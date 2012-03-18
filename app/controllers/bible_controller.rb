@@ -1,0 +1,3 @@
+class BibleController < ApplicationController
+
+end

@@ -37,9 +37,15 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
+gem 'nokogiri'
+
 group :development do
   gem 'rspec-rails'
   gem 'guard-rspec'
   gem 'guard-spork'
   gem 'spork-rails'
+end
+
+group :test do
+  gem 'webmock'
 end
