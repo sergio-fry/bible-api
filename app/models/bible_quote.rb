@@ -1,4 +1,6 @@
 class BibleQuote
+  attr_reader :quote_link
+
   REGEXP = /([[:alnum:]]+)[^[:alnum:]]+([[:digit:]]+)[^[:alnum:]]+([[:digit:]]+)/
 
   class QuoteLinkMalformed < StandardError; end;

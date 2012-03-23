@@ -7,9 +7,19 @@ describe Bible do
       to_return(:status => 200, :body => File.new(File.join(Rails.root, "spec/fixtures/bibleonlineru_01_03")))
   end
 
-  it "should return quote text" do
-    Bible.quote("Быт. 3:1").should eq("Змей был хитрее всех зверей полевых, которых создал Господь Бог. И сказал змей жене: подлинно ли сказал Бог: не ешьте ни от какого дерева в раю?")
+  describe "#quotes" do
+    before { @quotes = Bible.quotes("Быт. 3:1") }
 
-    Bible.quote("Быт. 3:10").should eq("Он сказал: голос Твой я услышал в раю, и убоялся, потому что я наг, и скрылся.")
+    it "should return quote text" do
+      @quotes.first[:verses].first[:text].should eq("Змей был хитрее всех зверей полевых, которых создал Господь Бог. И сказал змей жене: подлинно ли сказал Бог: не ешьте ни от какого дерева в раю?")
+    end
+
+    it "should return verse number" do
+      @quotes.first[:verses].first[:number].should eq(1)
+    end
+
+    it "should return quote_link" do
+      @quotes.first[:quote_link].should eq("Быт. 3:1")
+    end
   end
 end

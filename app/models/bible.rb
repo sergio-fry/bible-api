@@ -1,11 +1,24 @@
 class Bible
   BASE_URL = "http://rus.easy.bibleonline.ru/"
 
-  def self.quote(quote_link)
-    quote = BibleQuote.new(quote_link)
+  class QuoteLinkCantBeBlank < StandardError; end;
 
-    doc = Nokogiri::HTML(open(BASE_URL + "1/#{quote.chapter}"))
+  def self.quotes(quote_link)
+    raise QuoteLinkCantBeBlank.new if quote_link.blank?
 
-    doc.css("ol li")[quote.verse-1].text
+    result = []
+
+    quote_link.split(",").each do |ql|
+      quote = BibleQuote.new(ql)
+
+      doc = Nokogiri::HTML(open(BASE_URL + "1/#{quote.chapter}"))
+
+      result << {
+        :quote_link => quote.quote_link,
+        :verses => [{ :text => doc.css("ol li")[quote.verse-1].text, :number => quote.verse }]
+      }
+    end
+
+    result
   end
 end
