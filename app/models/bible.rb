@@ -15,7 +15,7 @@ class Bible
 
       result << {
         :quote_link => quote.quote_link,
-        :verses => [{ :text => doc.css("ol li")[quote.verse-1].text, :number => quote.verse }]
+        :verses => quote.verses.map { |verse| { :text => doc.css("ol li")[verse-1].text, :number => verse } }
       }
     end
 

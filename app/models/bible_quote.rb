@@ -1,7 +1,7 @@
 class BibleQuote
   attr_reader :quote_link
 
-  REGEXP = /([[:alnum:]]+)[^[:alnum:]]+([[:digit:]]+)[^[:alnum:]]+([[:digit:]]+)/
+  REGEXP = /([[:alnum:]]+)[^[:alnum:]]+([[:digit:]]+)[^[:alnum:]]+([[:digit:]]+)(-[[:digit:]]+)?/
 
   class QuoteLinkMalformed < StandardError; end;
   class QuoteLinkCantBeBlank < StandardError; end;
@@ -23,9 +23,11 @@ class BibleQuote
     match[2].to_i
   end
 
-  def verse
+  def verses
     match = @quote_link.match(REGEXP)
     raise QuoteLinkMalformed.new unless match
-    match[3].to_i
+    from = match[3]
+    to = match[4].present? ? match[4][1..-1] : match[3]
+    (from.to_i..to.to_i).to_a
   end
 end

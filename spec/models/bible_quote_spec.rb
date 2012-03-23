@@ -34,7 +34,12 @@ describe BibleQuote do
   describe "verse detection" do
     it "should detect verse number" do
       bible_quote = BibleQuote.new "Act 3:12"
-      bible_quote.verse.should eq(12)
+      bible_quote.verses.should eq([12])
+    end
+
+    it "should detect range of verses" do
+      bible_quote = BibleQuote.new "Act 3:8-12"
+      bible_quote.verses.should eq((8..12).to_a)
     end
   end
 end
