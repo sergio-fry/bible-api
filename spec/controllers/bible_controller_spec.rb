@@ -18,14 +18,6 @@ describe BibleController do
       assigns(:quotes).should have(1).item
     end
 
-    it "should be json" do
-      get :quote, :q => "Быт. 3:4"
-
-      lambda do
-        JSON.parse response.body
-      end.should_not raise_error(JSON::ParserError)
-    end
-
     it "should be 400 if q is not present" do
       get :quote
       response.code.to_i.should eq(400)

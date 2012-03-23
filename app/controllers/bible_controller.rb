@@ -4,7 +4,7 @@ class BibleController < ApplicationController
 
     @quotes= Bible.quotes(params[:q])
 
-    render :text => @quotes.to_json
+    render :json => @quotes.to_json, :callback => params[:callback]
   rescue BibleQuote::QuoteLinkMalformed, Bible::QuoteLinkCantBeBlank
     render :text => "Error", :status => 400
   rescue OpenURI::HTTPError
