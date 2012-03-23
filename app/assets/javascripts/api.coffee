@@ -6,4 +6,5 @@ jQuery.bible_api = jQuery.extend {}, {
       dataType: "jsonp",
       success: callback,
       error: error
+    }
   }
