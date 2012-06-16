@@ -22,4 +22,35 @@ describe Bible do
       @quotes.first[:quote_link].should eq("Быт. 3:1")
     end
   end
+
+  describe "#book_number" do
+    {
+      "Быт" => 1,
+      "Исх" => 2,
+      "Лев" => 3,
+      "Числ" => 4,
+      "Чис" => 4,
+      "Втор" => 5,
+      "Нав" => 6,
+      "ИсНав" => 6,
+      "Суд" => 7,
+      "Судей" => 7,
+      "Руф" => 8,
+      "Руфь" => 8,
+      "1Цар" => 9,
+      "2Цар" => 10,
+      "3Цар" => 11,
+      "4Цар" => 12,
+    }.each do |book_name, book_number|
+      context "bookname is '#{book_name}'" do
+        it "should be eq #{book_number}" do
+          Bible.book_number(book_name).should eq(book_number)
+        end
+      end
+    end
+
+    it "should accept lowcase names" do
+      Bible.book_number("быт").should eq(1)
+    end
+  end
 end
